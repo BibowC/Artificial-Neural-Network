@@ -103,3 +103,74 @@ dh_cs15_V3 = [Dh_cs15V3] * len(dP_cs15_V3)
 Re_Cs15_V3 = Reynolds2(mfr_cs15_V3, dh_cs15_V3, Acs_cs15V3, mu)
 Vel_Cs15_V3 = Velocity(mfr_cs15_V3, rho, Acs_cs15V3)
 f_Cs15_V3 = ffactor(dP_cs15_V3, dh_cs15_V3, Lf, rho, Vel_Cs15_V3)
+
+def Traces(x, y, name, color, symbol): #symbol = circle, square, diamond, cross, triangle-up, pentaon, hexagon, star
+    trace = go.Scatter(
+        x=x,
+        y=y,
+        name=name,
+        mode='markers',
+        marker=dict(
+            size=15,
+            color=color,
+            symbol=symbol,  # Forma do marcador
+            line=dict(
+                width=2,
+                color='Black'  # Cor da borda do marcador
+            )
+        )
+    )
+    return trace
+
+
+
+def curves(trace, title, ytitle):
+
+    fig = go.Figure(data = trace)
+
+    fig.update_layout(
+    font=dict(
+    size=15),
+    title={
+        'text': title,
+        'x': 0.5,
+        'xanchor': 'center'
+    },
+    xaxis={
+        'title': 'Reynolds',
+        'showline': True,
+        'showgrid': False,
+        'zeroline': True,
+        'zerolinecolor': 'black',
+        'linecolor': 'black',
+        'ticks': 'outside',
+        'mirror': True
+    },
+    yaxis={
+        'title': ytitle,
+        'showline': True,
+        'showgrid': False,
+        'zeroline': True,
+        'zerolinecolor': 'black',
+        'linecolor': 'black',
+        'ticks': 'outside',
+        'mirror': True
+    },
+    plot_bgcolor='white',
+    hovermode='closest',
+    width=800,  # Largura do gráfico
+    height=600  # Altura do gráfico
+)
+    
+    pyo.plot(fig)
+
+    #a = Traces(Re_cs4_V3, abs_cs4V3, 'dp_cs4V3', 'red', 'circle')
+b = Traces(Re_cs6_V3, abs_cs6V3, 'dp_cs6V3','red', 'circle')
+c = Traces(Re_cs8_V3, abs_cs8V3, 'dp_cs8V3', 'green','circle')
+d = Traces(Re_cs10_V3, abs_cs10V3, 'dp_cs10V3', 'blue','circle')
+e = Traces(Re_cs12_V3, abs_cs12V3, 'dp_cs12V3', 'cyan','circle')
+
+
+traces = [b,c,d,e]
+
+curves(traces, 'dP x Reynolds', 'dP (Pa)')
