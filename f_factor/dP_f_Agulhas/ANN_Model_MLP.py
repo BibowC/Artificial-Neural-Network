@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 
 #import data
 
-ANNDF = pd.read_excel('fxReynoldsCFD.xlsx')
+ANNDF = pd.read_excel('fxReynoldsCFD_ANN.xlsx')
 
 X = ANNDF.iloc[:,[0,2]].values
 Y = ANNDF.iloc[:, 1].values.reshape(-1,1)
